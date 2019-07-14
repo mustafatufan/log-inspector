@@ -22,7 +22,7 @@
 		<mkdir dir="${dist.dir}"/>
 		<jar jarfile="${dist.dir}/assignment.jar" basedir="${build.dir}">
 			<manifest>
-				<attribute name="Main-Class" value="ee.tufan.log.LogInspector"/>
+				<attribute name="Main-Class" value="ee.tufan.log.Application"/>
 			</manifest>
 		</jar>
 	</target>

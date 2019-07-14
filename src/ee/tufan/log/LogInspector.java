@@ -1,8 +1,17 @@
 package ee.tufan.log;
 
+import java.io.File;
+
 public class LogInspector {
 
-	public static void main(String[] args) {
+	private String result;
 
+	public LogInspector(File logFile, int resCount) throws LogInspectorException {
+		// TODO: read file, parse, inspect and set result
 	}
+
+	public String getResult() {
+		return result;
+	}
+
 }
