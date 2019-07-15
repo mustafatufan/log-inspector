@@ -72,17 +72,17 @@ public class LogInspectorParser {
 			throw new LogInspectorException(ex.getMessage());
 		}
 
-		int nextIndex = raw.indexOf(INDEX_THREAD_ID);
-		String threadId = raw.substring(1, nextIndex);
-		raw = raw.substring(nextIndex + 1).trim();
+		int threadIdIndex = raw.indexOf(INDEX_THREAD_ID);
+		String threadId = raw.substring(1, threadIdIndex);
+		raw = raw.substring(threadIdIndex + INDEX_THREAD_ID.length() - 1).trim();
 
-		nextIndex = raw.indexOf(INDEX_USER_CONTEXT);
-		String userContext = raw.substring(1, nextIndex);
-		raw = raw.substring(nextIndex + 1).trim();
+		int userContextIndex = raw.indexOf(INDEX_USER_CONTEXT);
+		String userContext = raw.substring(1, userContextIndex);
+		raw = raw.substring(userContextIndex + INDEX_USER_CONTEXT.length() - 1).trim();
 
-		nextIndex = raw.lastIndexOf(INDEX_DURATION);
-		Long duration = Long.valueOf(raw.substring(nextIndex + 4));
-		raw = raw.substring(0, nextIndex);
+		int durationIndex = raw.lastIndexOf(INDEX_DURATION);
+		Long duration = Long.valueOf(raw.substring(durationIndex + INDEX_DURATION.length()));
+		raw = raw.substring(0, durationIndex);
 
 		String[] arr = raw.split(REGEX_SPACE);
 		String resourceName = arr[0];

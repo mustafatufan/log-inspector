@@ -60,7 +60,7 @@ Here is a short snippet of a log file. The goal of the assignment is to create a
 2. `timestamp`
 3. `thread-id` (in brackets)
 4. optional `user context` (in square brackets)
-5. URI + query string
+5. `URI + query string`
 6. string `"in"`
 7. `request duration` in milliseconds
 

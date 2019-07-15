@@ -26,7 +26,7 @@ public class Application {
 	}
 
 	public Application(String[] args) {
-		checkHelp(args[0]);
+		checkHelp(args.length == 0 ? null : args[0]);
 
 		try {
 			checkArgs(args);

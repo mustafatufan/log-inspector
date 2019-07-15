@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
 
 public class LogInspectorHistogram {
 
-	private final static String HEADER = "\n\n\u23F0 Histogram Based on Hours\n\nHour | 0% ███████████████████████████████████ 100%\n__________________________________________________";
+	private final static String HEADER = "\n\n\u23F0 Histogram Based on Hours\n\nHour | 0% ███████████████████████████████████ 100%\n_____|____________________________________________";
 
 	private final static String DOT = "█";
 	private final static int MAX_LENGTH = 42;
