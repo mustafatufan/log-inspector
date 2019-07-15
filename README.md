@@ -1,5 +1,52 @@
 # Log Inspector
 :squirrel: Log Inspector is an interview project.
+
+###### Output Example
+```
+Mustafas-MacBook-Pro-3:dist mustafatufan$ java -jar assignment.jar examples/timing.log 5
+
+⌕ Log Inspector Result
+
+✋ Top 5 Resources by Average Duration
+
+#1 /changeDueDate.do - (3048.83 ms)
+#2 /saldoDetails.do - (1768.67 ms)
+#3 action=BILLING - (1455.4 ms)
+#4 /do/wololo/play - (1337 ms)
+#5 getBroadbandSubscriptions - (1179.36 ms)
+
+⏰ Histogram Based on Hours
+
+Hour | 0% ███████████████████████████████████ 100%
+__________________________________________________
+  00 | ███████████████████████████████████████████
+  01 | █
+  02 | █
+  03 | █
+  04 | █
+  05 | █
+  06 | █
+  07 | █
+  08 | █
+  09 | █
+  10 | █
+  11 | █
+  12 | █
+  13 | █
+  14 | █
+  15 | █
+  16 | █
+  17 | █
+  18 | █
+  19 | █
+  20 | █
+  21 | █
+  22 | █
+  23 | █
+
+⏭ Total Runtime: 301 ms
+```
+
 ## Introduction
 Here is a short snippet of a log file. The goal of the assignment is to create a program that parses the log file and extracts, aggregates and presents the data from it. The log file contains request durations. The file format is best explained with the following examples:
 ```
@@ -12,9 +59,10 @@ Here is a short snippet of a log file. The goal of the assignment is to create a
 1. `date`
 2. `timestamp`
 3. `thread-id` (in brackets)
-4. optional `user context` (in square brackets) URI + query string
-5. string `"in"`
-6. `request duration` in milliseconds
+4. optional `user context` (in square brackets)
+5. URI + query string
+6. string `"in"`
+7. `request duration` in milliseconds
 
 ...and...
 ```

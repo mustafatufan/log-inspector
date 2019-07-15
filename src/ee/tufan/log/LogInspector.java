@@ -1,5 +1,9 @@
 package ee.tufan.log;
 
+import ee.tufan.log.analyser.LogInspectorAnalyser;
+import ee.tufan.log.parser.LogInspectorParser;
+import ee.tufan.log.model.Log;
+
 import java.io.File;
 import java.util.List;
 
@@ -9,10 +13,10 @@ public class LogInspector {
 
 	public LogInspector(File logFile, int resCount) throws LogInspectorException {
 		LogInspectorParser parser = new LogInspectorParser();
-		List<LogLine> logs = parser.parse(logFile);
+		List<Log> logList = parser.parse(logFile);
 
 		LogInspectorAnalyser analyser = new LogInspectorAnalyser();
-		result = analyser.analyse(logs, resCount);
+		result = analyser.analyse(logList, resCount);
 	}
 
 	public String getResult() {

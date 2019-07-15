@@ -5,23 +5,25 @@ import java.text.MessageFormat;
 
 public class Application {
 
+	private final long START_TIME = System.currentTimeMillis();
+
+	private final static String MESSAGE_ERROR_PARAM = "\nParameters are invalid!";
+	private final static String MESSAGE_ERROR_FILE_PATH = "\n[FILE_PATH] parameter is wrong or file is corrupt!";
+	private final static String MESSAGE_ERROR_RES_COUNT = "\n[RES_COUNT] parameter is invalid!";
+
+	private final static String MESSAGE_HELP = "\n\u2315 Log Inspector Help\n\nParameters:\n[FILE_PATH]: Log file's path with extension without quotes. (Exp: examples/timing.log)\n[RES_COUNT]: Number of resources to list, can't be negative. (Exp: 42)\n\nUsage:\njava -jar assignment.jar [FILE_PATH] [RES_COUNT]";
+	private final static String MESSAGE_RUNTIME = "\n\u23ED Total Runtime: {0} ms";
+
+	private final static String PARAM_HELP = "-h";
+
+	private final static int INDEX_FILE_PATH = 0;
+	private final static int INDEX_RES_COUNT = 1;
+
+	private final static String HEADER = "\n\u2315 Log Inspector Result\n";
+
 	public static void main(String[] args) {
 		new Application(args);
 	}
-
-	private final long START_TIME = System.currentTimeMillis();
-
-	private final String MESSAGE_ERROR_PARAM = "\nParameters are invalid!";
-	private final String MESSAGE_ERROR_FILE_PATH = "\n[FILE_PATH] parameter is wrong or file is corrupt!";
-	private final String MESSAGE_ERROR_RESOURCE_COUNT = "\n[RES_COUNT] parameter is invalid!";
-
-	private final String MESSAGE_HELP = "\n\u2315 Log Inspector Help\n\nParameters:\n[FILE_PATH]: Log file's path with extension without quotes. (Exp: examples/timing.log)\n[RES_COUNT]: Number of resources to list, can't be negative. (Exp: 42)\n\nUsage:\njava -jar assignment.jar [FILE_PATH] [RES_COUNT]";
-	private final String MESSAGE_RUNTIME = "\n\u279d Total Runtime: {0} ms";
-
-	private final String PARAM_HELP = "-h";
-
-	private final int INDEX_FILE_PATH = 0;
-	private final int INDEX_RES_COUNT = 1;
 
 	public Application(String[] args) {
 		checkHelp(args[0]);
@@ -33,7 +35,7 @@ public class Application {
 			int resourceCount = getResourceCount(args[INDEX_RES_COUNT]);
 
 			LogInspector inspector = new LogInspector(logFile, resourceCount);
-			System.out.println(inspector.getResult());
+			System.out.println(HEADER.concat(inspector.getResult()));
 		} catch (LogInspectorException ex) {
 			ex.printStackTrace();
 			printHelp();
@@ -64,7 +66,7 @@ public class Application {
 
 	private int getResourceCount(String param) throws LogInspectorException {
 		int count;
-		LogInspectorException exception = new LogInspectorException(MESSAGE_ERROR_RESOURCE_COUNT);
+		LogInspectorException exception = new LogInspectorException(MESSAGE_ERROR_RES_COUNT);
 		try {
 			count = Integer.valueOf(param).intValue();
 			if (count < 0) {
