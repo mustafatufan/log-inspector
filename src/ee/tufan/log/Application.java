@@ -58,23 +58,27 @@ public class Application {
 
 	private File getLogFile(String filePath) throws LogInspectorException {
 		File file = new File(filePath);
+
 		if (!file.canRead()) {
 			throw new LogInspectorException(MESSAGE_ERROR_FILE_PATH);
 		}
+
 		return file;
 	}
 
 	private int getResourceCount(String param) throws LogInspectorException {
 		int count;
+
 		LogInspectorException exception = new LogInspectorException(MESSAGE_ERROR_RES_COUNT);
 		try {
-			count = Integer.valueOf(param).intValue();
+			count = Integer.valueOf(param);
 			if (count < 0) {
 				throw exception;
 			}
 		} catch (NumberFormatException ex) {
 			throw exception;
 		}
+
 		return count;
 	}
 

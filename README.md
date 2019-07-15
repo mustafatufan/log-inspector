@@ -3,39 +3,44 @@
 
 ###### Output Example
 ```
-Mustafas-MacBook-Pro-3:dist mustafatufan$ java -jar assignment.jar examples/timing.log 5
+mustafatufan$ java -jar assignment.jar examples/timing.log 10
 
 ⌕ Log Inspector Result
 
-✋ Top 5 Resources by Average Duration
+✋ Top 10 Resources by Average Duration
 
-#1 /changeDueDate.do - (3048.83 ms)
-#2 /saldoDetails.do - (1768.67 ms)
-#3 action=BILLING - (1455.4 ms)
-#4 /do/wololo/play - (1337 ms)
-#5 getBroadbandSubscriptions - (1179.36 ms)
+# 1 /saldoDetails.do - (1768.67 ms)
+# 2 /changeDueDate.do - (1626.5 ms)
+# 3 action=BILLING - (1455.4 ms)
+# 4 /do/wololo/play - (1337 ms)
+# 5 getBroadbandSubscriptions - (1179.36 ms)
+# 6 action=SUBSCRIPTION - (1043.64 ms)
+# 7 updateSubscriptionFromBackend - (972.73 ms)
+# 8 /api - (702.67 ms)
+# 9 /saveECMPreferences.do - (653 ms)
+#10 action=NOTIFICATIONS - (603.95 ms)
 
 ⏰ Histogram Based on Hours
 
 Hour | 0% ███████████████████████████████████ 100%
-__________________________________________________
-  00 | ███████████████████████████████████████████
-  01 | █
+_____|____________________________________________
+  00 | █████████████████████████████
+  01 | ██
   02 | █
   03 | █
   04 | █
   05 | █
   06 | █
-  07 | █
+  07 | ██████
   08 | █
   09 | █
   10 | █
   11 | █
-  12 | █
-  13 | █
+  12 | ██
+  13 | ██
   14 | █
   15 | █
-  16 | █
+  16 | ███
   17 | █
   18 | █
   19 | █

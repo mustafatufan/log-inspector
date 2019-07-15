@@ -32,7 +32,6 @@ public class LogInspectorTopResources {
 		int count = Integer.min(resCount, averageMap.size());
 		String title = MessageFormat.format(HEADER, count);
 		graph = title.concat(createGraph(averageMap, resCount));
-
 	}
 
 	private Map<String, LogAverage> getAverageMap(List<Log> logList) {

@@ -7,7 +7,6 @@ import java.util.List;
 public class LogInspectorAnalyser {
 
 	public String analyse(List<Log> logList, int resCount) {
-
 		LogInspectorTopResources topResources = new LogInspectorTopResources(logList, resCount);
 		String resourcesGraph = topResources.getGraph();
 

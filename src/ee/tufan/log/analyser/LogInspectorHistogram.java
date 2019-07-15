@@ -16,6 +16,7 @@ public class LogInspectorHistogram {
 	private final static int MAX_LENGTH = 42;
 
 	private final static String FORMAT_HOUR = "  %02d | ";
+	private final static int COUNT_HOUR = 24;
 
 	private String graph;
 
@@ -34,8 +35,10 @@ public class LogInspectorHistogram {
 		for (Log log : logList) {
 			Long duration = log.getDuration();
 			totalTime += duration;
+
 			Long hourDuration = histogram.get(log.getHour());
 			hourDuration = hourDuration == null ? duration : hourDuration + duration;
+
 			histogram.put(log.getHour(), hourDuration);
 		}
 
@@ -44,18 +47,22 @@ public class LogInspectorHistogram {
 
 	private String createGraph(Map<Integer, Long> histogram, Long totalTime) {
 		String result = "";
-		for (int i = 0; i < 24; i++) {
-			Long duration = histogram.get(i) == null ? 0l : histogram.get(i);
-			float rate = (float) duration / (float) totalTime;
-			int n = (int) (rate * MAX_LENGTH) + 1;
-			result = result.concat("\n")
-					.concat(String.format(FORMAT_HOUR, Integer.parseInt(String.valueOf(i))))
-					.concat(IntStream.range(0, n)
-							.mapToObj(j -> DOT)
-							.collect(Collectors.joining("")));
+
+		for (int hour = 0; hour < COUNT_HOUR; hour++) {
+			result = result.concat(createGraphLine(histogram, totalTime, hour));
 		}
+
 		return result;
 	}
 
+	private String createGraphLine(Map<Integer, Long> histogram, Long totalTime, int hour) {
+		Long duration = histogram.get(hour) == null ? 0l : histogram.get(hour);
+		float rate = (float) duration / (float) totalTime;
+		int lineLength = (int) (rate * MAX_LENGTH) + 1;
+		return "\n".concat(String.format(FORMAT_HOUR, Integer.parseInt(String.valueOf(hour))))
+				.concat(IntStream.range(0, lineLength)
+						.mapToObj(j -> DOT)
+						.collect(Collectors.joining("")));
+	}
 
 }

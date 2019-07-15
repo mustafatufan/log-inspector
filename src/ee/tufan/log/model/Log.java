@@ -45,6 +45,14 @@ public class Log {
 		resourceType = findResourceType(rawResource);
 	}
 
+	/**
+	 * Searches for <code>ACTION</code> and <code>TARGET</code> parameters in <code>rawResource</code>.
+	 * If found, returns parameter as <code>resourceType</code>.
+	 * Else returns <code>rawResource</code>'s root as <code>resourceType</code>.
+	 *
+	 * @param rawResource resource from log file
+	 * @return resourceType
+	 */
 	private String findResourceType(String rawResource) {
 		Pattern pattern = Pattern.compile(REGEX_ACTION_TARGET);
 		Matcher matcher = pattern.matcher(rawResource);
@@ -52,7 +60,6 @@ public class Log {
 			return matcher.group();
 		}
 
-		// If it is not an action or target then get root as resourceType.
 		return rawResource.split(REGEX_QUESTION_MARK)[0];
 	}
 
@@ -67,4 +74,5 @@ public class Log {
 	public String getResourceType() {
 		return resourceType;
 	}
+
 }
