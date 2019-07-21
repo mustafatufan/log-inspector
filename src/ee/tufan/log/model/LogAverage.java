@@ -19,12 +19,15 @@ public class LogAverage implements Comparable<LogAverage> {
 	}
 
 	@Override
-	public int compareTo(LogAverage o) {
+	public int compareTo(LogAverage other) {
 		int result = 0;
 
-		if (this.average > o.average) return 1;
-		else if (this.average < o.average) return -1;
-		
+		if (this.average > other.average) {
+			result = 1;
+		} else if (this.average < other.average) {
+			result = -1;
+		}
+
 		return result;
 	}
 }

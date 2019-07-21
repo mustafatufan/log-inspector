@@ -61,6 +61,13 @@ public class LogInspectorParser {
 		return logLines;
 	}
 
+	/**
+	 * TODO: Refactor
+	 *
+	 * @param raw string of log line
+	 * @return <code>Log</code> object
+	 * @throws LogInspectorException
+	 */
 	private Log createLogLineFromString(String raw) throws LogInspectorException {
 		SimpleDateFormat sdf = new SimpleDateFormat(FORMAT_DATE);
 		Date timestamp;
