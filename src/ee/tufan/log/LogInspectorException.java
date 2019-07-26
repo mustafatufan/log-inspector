@@ -6,4 +6,8 @@ public class LogInspectorException extends Exception {
 		super(message);
 	}
 
+	public LogInspectorException(String message, Throwable ex) {
+		super(message, ex);
+	}
+
 }

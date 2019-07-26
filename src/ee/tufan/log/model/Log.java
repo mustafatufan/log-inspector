@@ -1,8 +1,6 @@
 package ee.tufan.log.model;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import java.time.LocalDateTime;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -10,9 +8,10 @@ public class Log {
 
 	private final static String REGEX_ACTION_TARGET = "(action|target)([=])\\w+";
 	private final static String REGEX_QUESTION_MARK = "[?]";
+	private final static Pattern pattern = Pattern.compile(REGEX_ACTION_TARGET);
 
 	// raw
-	private Date timestamp;
+	private LocalDateTime timestamp;
 	private String threadId;
 	private String userContext;
 	private String resource;
@@ -23,7 +22,7 @@ public class Log {
 	private int hour;
 	private String resourceType;
 
-	public Log(Date timestamp, String threadId, String userContext, String resource, Long dataPayload, Long duration) {
+	public Log(LocalDateTime timestamp, String threadId, String userContext, String resource, Long dataPayload, Long duration) {
 		this.timestamp = timestamp;
 		this.threadId = threadId;
 		this.userContext = userContext;
@@ -35,10 +34,8 @@ public class Log {
 		setResourceType(resource);
 	}
 
-	private void setHour(Date rawDate) {
-		Calendar calendar = GregorianCalendar.getInstance();
-		calendar.setTime(rawDate);
-		hour = calendar.get(Calendar.HOUR_OF_DAY);
+	private void setHour(LocalDateTime rawDate) {
+		hour = rawDate.getHour();
 	}
 
 	private void setResourceType(String rawResource) {
@@ -54,7 +51,6 @@ public class Log {
 	 * @return resourceType
 	 */
 	private String findResourceType(String rawResource) {
-		Pattern pattern = Pattern.compile(REGEX_ACTION_TARGET);
 		Matcher matcher = pattern.matcher(rawResource);
 		while (matcher.find()) {
 			return matcher.group();

@@ -69,14 +69,13 @@ public class Application {
 	private int getResourceCount(String param) throws LogInspectorException {
 		int count;
 
-		LogInspectorException exception = new LogInspectorException(MESSAGE_ERROR_RES_COUNT);
 		try {
 			count = Integer.valueOf(param);
 			if (count < 0) {
-				throw exception;
+				throw new LogInspectorException(MESSAGE_ERROR_RES_COUNT);
 			}
 		} catch (NumberFormatException ex) {
-			throw exception;
+			throw new LogInspectorException(MESSAGE_ERROR_RES_COUNT, ex);
 		}
 
 		return count;

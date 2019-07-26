@@ -7,10 +7,10 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class LogInspectorParser {
@@ -24,6 +24,7 @@ public class LogInspectorParser {
 	private final static String INDEX_DURATION = " in ";
 
 	private final static String FORMAT_DATE = "yyyy-MM-dd HH:mm:ss,SSS";
+	private final static DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern(FORMAT_DATE);
 
 	private final static String REGEX_SPACE = "\\s+";
 
@@ -42,7 +43,7 @@ public class LogInspectorParser {
 				rawLines.add(line);
 			}
 		} catch (IOException ex) {
-			throw new LogInspectorException(ex.getMessage());
+			throw new LogInspectorException(ex.getMessage(), ex);
 		}
 
 		return rawLines;
@@ -69,15 +70,15 @@ public class LogInspectorParser {
 	 * @throws LogInspectorException
 	 */
 	private Log createLogLineFromString(String raw) throws LogInspectorException {
-		SimpleDateFormat sdf = new SimpleDateFormat(FORMAT_DATE);
-		Date timestamp;
+		String dateString = raw.substring(0, INDEX_TIMESTAMP);
+
+		LocalDateTime timestamp;
 		try {
-			String dateString = raw.substring(0, INDEX_TIMESTAMP);
-			timestamp = sdf.parse(dateString);
-			raw = raw.substring(INDEX_TIMESTAMP + 1).trim();
-		} catch (ParseException ex) {
-			throw new LogInspectorException(ex.getMessage());
+			timestamp = LocalDateTime.parse(dateString, FORMATTER);
+		} catch (DateTimeParseException ex) {
+			throw new LogInspectorException(ex.getMessage(), ex);
 		}
+		raw = raw.substring(INDEX_TIMESTAMP + 1).trim();
 
 		int threadIdIndex = raw.indexOf(INDEX_THREAD_ID);
 		String threadId = raw.substring(1, threadIdIndex);
